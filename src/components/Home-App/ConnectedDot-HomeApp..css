@@ -1,0 +1,20 @@
+.animation-container {
+    width: 100%;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .dot {
+    fill: #0074d9;
+    transition: fill 0.3s ease;
+  }
+  
+  .dot:hover {
+    fill: #ff4136;
+  }
+  
+  .line {
+    stroke: #333;
+    stroke-width: 2;
+  }
+  

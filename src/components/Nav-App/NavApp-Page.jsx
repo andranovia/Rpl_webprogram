@@ -15,8 +15,8 @@ const NavApp = () => {
   };
 
   return (
-    <div className="">
-      <nav className="py-4 ">
+    <div className="sm:px-[11rem]">
+      <nav className="py-5 px-5">
         <div className=" dark container mx-auto flex justify-between items-center relative drop-shadow-lg">
           <div className="text-black font-extrabold text-2xl bglime-300">
             Your Logo

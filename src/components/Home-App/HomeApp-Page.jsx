@@ -1,29 +1,80 @@
 import NavApp from "../Nav-App/NavApp-Page";
 import "./HomeApp.css";
+import HeroTextApp from "./TextHeroApp";
+import ConnectedDots from "./ConnectedDot-HomeApp";
+import SchoolImage from "../../../public/img/school_image.jpg";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
 const HomeApp = () => {
-  /**const slides = [
-    {
-      url: "../../../public/img/photo-class1.jpg",
-    },
-    {
-      url: "../../../public/img/photo-class2.jpg",
-    },
-  ];**/
+  const [ref, inView] = useInView({
+    triggerOnce: false, // Allow animations to repeat when becoming visible again
+    threshold: 0.1,
+  });
+
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (inView) {
+      setVisible(true);
+    } else {
+      setVisible(false); // Reset visible state when element exits viewport
+    }
+  }, [inView]);
 
   return (
     <div>
       <NavApp />
-      <section className="py-40 relative ">
+      <section className="py-20 relative pl-10 sm:mb-[10rem]">
         <div className="grid md:grid-cols-2 max-w-[1240px] m-auto">
-          <div className="flex flex-col justify-center md:items-start w-full px-2 py-0">
-            <p className="text-2xl">Welcome to</p>
-            <h1 className="py-3 text-5xl md: text-7xl font-bold">RPLGRAM</h1>
-            <p className="text-2xl">SMKN 1 Purwosari </p>
-            <button className="py-3 px-4 bg-blue-500 rounded-full mt-4">View More!</button>
-
+          <div className="flex flex-col justify-center items-start md:w-full px-2 py-0 ">
+            <div className="">
+              <HeroTextApp />
+            </div>
+            <button className="py-3 px-4 bg-blue-500 rounded-full ">
+              View More!
+            </button>
           </div>
         </div>
       </section>
+      <div className="relative ">
+      <section className="py-20 pl-2 mb-[15rem] sm:ml-[10rem]">
+      <div className="absolute inset-0 z-0 mr-10 sm:ml-[10rem]">
+        <ConnectedDots />
+      </div>
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 40}}
+        animate={visible ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.4 }}
+        className="relative z-10 w-[20rem] ml-[5rem]"
+      >
+        <img src={SchoolImage} alt="" className="rounded-md" />
+      </motion.div>
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 40 }}
+        animate={visible ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="relative container text-left flex justify-center sm:ml-[25rem] sm:w-[42rem] sm:bottom-[12rem]"
+      >
+        <div className="grid grid-cols-1 ml-20">
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={visible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="relative font-poppins justify-center mb-[2rem]"
+          >
+            <h1 className="text-2xl font-bold text-[#434343] relative z-10 sm:text-2xl mt-5 md:mt-0 mb-4">About us</h1>
+            <p className="text-xl font-normal text-[#8b8b8b] relative z-10 sm:text-2xl">At SMKN 1 Purwosari, the Software Engineering major is a standout program designed to prepare students </p>
+            <p className="text-xl font-normal text-[#aaaaaa] relative z-10 sm:text-2xl">for success in the rapidly evolving tech industry. </p>
+          </motion.div>
+        </div>
+      </motion.div>
+    </section>
+      </div>
 
       <section className="bg-white py-16">
         <div className="container mx-auto text-center">
